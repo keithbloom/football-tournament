@@ -1,5 +1,11 @@
 import { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -8,6 +14,7 @@ import { useTableData, TableItem } from "./useTableData";
 const useStyles = makeStyles((theme) => ({
   root: {
     ...theme.typography.body2,
+    minWidth: 700,
   },
   teamBlock: {
     ...theme.typography.body1,
@@ -18,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "5px",
     },
     "& img": {
-        maxWidth: "15px"
-    }
+      maxWidth: "15px",
+    },
   },
   tableRow: {
     "& td": {
@@ -43,22 +50,53 @@ const GroupTableItem = ({
 }: TableItem) => {
   const classes = useStyles();
   return (
-    <tr className={classes.tableRow}>
-      <td>{position}</td>
-      <td>
+    <TableRow className={classes.tableRow}>
+      <TableCell>{position}</TableCell>
+      <TableCell>
         <div className={classes.teamBlock}>
           <img alt={`${teamName} flag`} height="15px" src={crestUrl} />
           <span>{teamName}</span>
         </div>
-      </td>
-      <td>
+      </TableCell>
+      <TableCell>
         <strong>{playerName}</strong>
-      </td>
-      <td>{gamesPlayed}</td>
-      <td>{points}</td>
-    </tr>
+      </TableCell>
+      <TableCell>{gamesPlayed}</TableCell>
+      <TableCell>{points}</TableCell>
+    </TableRow>
   );
 };
+
+/**
+ * 
+ * @param param0 <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Dessert (100g serving)</TableCell>
+            <TableCell align="right">Calories</TableCell>
+            <TableCell align="right">Fat&nbsp;(g)</TableCell>
+            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.name}>
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell align="right">{row.calories}</TableCell>
+              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell align="right">{row.protein}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+ * @returns 
+ */
 
 const GroupTable = ({
   group,
@@ -69,24 +107,36 @@ const GroupTable = ({
 }) => {
   const classes = useStyles();
   return (
-    <div style={{ maxWidth: "250px" }}>
+    <div>
       <h3>{group}</h3>
-      <table className={classes.root}>
-        <thead>
-          <tr>
-            <th style={{ minWidth: "12px", textAlign: "left" }}>Pos</th>
-            <th style={{ minWidth: "170px", textAlign: "left" }}>Team</th>
-            <th style={{ minWidth: "150px", textAlign: "left" }}>Player</th>
-            <th style={{ minWidth: "12px", textAlign: "left" }}>Played</th>
-            <th style={{ minWidth: "12px", textAlign: "left" }}>Points</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item, i) => (
-            <GroupTableItem key={i} {...item} />
-          ))}
-        </tbody>
-      </table>
+      <TableContainer component={Paper}>
+        <Table className={classes.root} size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ minWidth: "12px", textAlign: "left" }}>
+                Pos
+              </TableCell>
+              <TableCell style={{ minWidth: "170px", textAlign: "left" }}>
+                Team
+              </TableCell>
+              <TableCell style={{ minWidth: "150px", textAlign: "left" }}>
+                Player
+              </TableCell>
+              <TableCell style={{ minWidth: "12px", textAlign: "left" }}>
+                Played
+              </TableCell>
+              <TableCell style={{ minWidth: "12px", textAlign: "left" }}>
+                Points
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {items.map((item, i) => (
+              <GroupTableItem key={i} {...item} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };
@@ -105,7 +155,7 @@ export const Tables = () => {
   return (
     <Grid container spacing={3}>
       {Object.entries(tableData).map(([key, items]) => (
-        <Grid key={key} item xs={6}>
+        <Grid key={key} item xs={12}>
           <Paper className={classes.paper}>
             <GroupTable group={key} items={items} />
           </Paper>

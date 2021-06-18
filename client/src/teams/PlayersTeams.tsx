@@ -28,7 +28,7 @@ const PlayersTeamRow = (props: Partial<Team> | undefined) => {
   const { name, crestUrl } = props;
   return (
     <div className={classes.teamBlock}>
-      <img height="15px" src={crestUrl} />
+      <img alt={`${name} flag`}  height="15px" src={crestUrl} />
       <span>{name}</span>
     </div>
   );

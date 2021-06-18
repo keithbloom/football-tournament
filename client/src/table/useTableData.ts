@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getTeamsForPlayers } from "../data";
-const standingsEndpoint = `http://localhost:4000/api/competitions/EC/standings`;
+const standingsEndpoint = `/api/competitions/EC/standings`;
 
 export type TableItem = {
   position: number;

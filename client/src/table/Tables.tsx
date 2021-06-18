@@ -46,7 +46,7 @@ const GroupTableItem = ({
       <td>{position}</td>
       <td>
         <div className={classes.teamBlock}>
-          <img height="15px" src={crestUrl} />
+          <img alt={`${teamName} flag`} height="15px" src={crestUrl} />
           <span>{teamName}</span>
         </div>
       </td>

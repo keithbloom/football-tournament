@@ -39,6 +39,7 @@ const GroupTableItem = ({
   playerName,
   points,
   crestUrl,
+  gamesPlayed,
 }: TableItem) => {
   const classes = useStyles();
   return (
@@ -53,6 +54,7 @@ const GroupTableItem = ({
       <td>
         <strong>{playerName}</strong>
       </td>
+      <td>{gamesPlayed}</td>
       <td>{points}</td>
     </tr>
   );
@@ -75,6 +77,7 @@ const GroupTable = ({
             <th style={{ minWidth: "12px", textAlign: "left" }}>Pos</th>
             <th style={{ minWidth: "170px", textAlign: "left" }}>Team</th>
             <th style={{ minWidth: "150px", textAlign: "left" }}>Player</th>
+            <th style={{ minWidth: "12px", textAlign: "left" }}>Played</th>
             <th style={{ minWidth: "12px", textAlign: "left" }}>Points</th>
           </tr>
         </thead>

@@ -100,6 +100,7 @@ export const Dashboard = function () {
         </Toolbar>
       </AppBar>
       <main className={classes.content}>
+      <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.container}>
         <Tables />
         </Container>

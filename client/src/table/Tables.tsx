@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.body2,
     minWidth: 700,
   },
+  smallCol: {
+    maxWidth: '15px',
+  },
   teamBlock: {
     ...theme.typography.body1,
     minWidth: "100px",
@@ -113,20 +116,20 @@ const GroupTable = ({
         <Table className={classes.root} size="small">
           <TableHead>
             <TableRow>
-              <TableCell style={{ minWidth: "12px", textAlign: "left" }}>
+              <TableCell >
                 Pos
               </TableCell>
-              <TableCell style={{ minWidth: "170px", textAlign: "left" }}>
+              <TableCell >
                 Team
               </TableCell>
-              <TableCell style={{ minWidth: "150px", textAlign: "left" }}>
+              <TableCell >
                 Player
               </TableCell>
-              <TableCell style={{ minWidth: "12px", textAlign: "left" }}>
-                Played
+              <TableCell >
+                PD
               </TableCell>
-              <TableCell style={{ minWidth: "12px", textAlign: "left" }}>
-                Points
+              <TableCell className={classes.smallCol} >
+                Pts
               </TableCell>
             </TableRow>
           </TableHead>

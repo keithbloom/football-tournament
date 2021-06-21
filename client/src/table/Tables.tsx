@@ -14,10 +14,9 @@ import { useTableData, TableItem } from "./useTableData";
 const useStyles = makeStyles((theme) => ({
   root: {
     ...theme.typography.body2,
-    minWidth: 700,
   },
   smallCol: {
-    maxWidth: '15px',
+    padding: "6px 6px 6px 12px",
   },
   teamBlock: {
     ...theme.typography.body1,
@@ -54,7 +53,7 @@ const GroupTableItem = ({
   const classes = useStyles();
   return (
     <TableRow className={classes.tableRow}>
-      <TableCell>{position}</TableCell>
+      <TableCell className={classes.smallCol}>{position}</TableCell>
       <TableCell>
         <div className={classes.teamBlock}>
           <img alt={`${teamName} flag`} height="15px" src={crestUrl} />
@@ -64,42 +63,11 @@ const GroupTableItem = ({
       <TableCell>
         <strong>{playerName}</strong>
       </TableCell>
-      <TableCell>{gamesPlayed}</TableCell>
-      <TableCell>{points}</TableCell>
+      <TableCell className={classes.smallCol}>{gamesPlayed}</TableCell>
+      <TableCell className={classes.smallCol}>{points}</TableCell>
     </TableRow>
   );
 };
-
-/**
- * 
- * @param param0 <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
- * @returns 
- */
 
 const GroupTable = ({
   group,
@@ -116,21 +84,11 @@ const GroupTable = ({
         <Table className={classes.root} size="small">
           <TableHead>
             <TableRow>
-              <TableCell >
-                Pos
-              </TableCell>
-              <TableCell >
-                Team
-              </TableCell>
-              <TableCell >
-                Player
-              </TableCell>
-              <TableCell >
-                PD
-              </TableCell>
-              <TableCell className={classes.smallCol} >
-                Pts
-              </TableCell>
+              <TableCell className={classes.smallCol}>P</TableCell>
+              <TableCell>Team</TableCell>
+              <TableCell>Player</TableCell>
+              <TableCell className={classes.smallCol}>PD</TableCell>
+              <TableCell className={classes.smallCol}>Pts</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

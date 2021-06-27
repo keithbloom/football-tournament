@@ -34,12 +34,6 @@ export type Fixture = {
     result?: Result;
 }
 
-const nullTeam: TeamPlayer = {
-    teamId: 0,
-    teamName: '',
-    crestUrl: '',
-    playerName: '',
-}
 
 export type FixturesType = Record<string, Fixture[]>;
 

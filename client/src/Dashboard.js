@@ -5,6 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { Tables } from "./table";
+import { Fixtures } from './fixtures';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -102,7 +103,7 @@ export const Dashboard = function () {
       <main className={classes.content}>
       <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.container}>
-        <Tables />
+        <Fixtures />
         </Container>
       </main>
     </div>

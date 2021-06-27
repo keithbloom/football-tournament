@@ -1,7 +1,6 @@
 
 import teams from "./teams.json";
 
-
 export type Team = {
   name: string;
   crestUrl: string;

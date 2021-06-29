@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TeamItem = ({ teamName, playerName, crestUrl }: TeamPlayer) => {
-  const classes = useStyles();
   return (
     <>
       <img alt={`${teamName} flag`} height="15px" src={crestUrl} />

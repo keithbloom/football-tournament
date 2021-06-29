@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row-reverse",
     justifyContent: "space-between",
+    alignItems: "centre",
   },
   teamItemAway: {
     display: "flex",
@@ -102,7 +103,7 @@ const FixtureList = ({ matches }: { matches: Fixture[] }) => {
                 <FixtureItem key={index} {...item} />
               ))}
             </TableBody>
-            <caption>{key}</caption>
+            <caption style={{'captionSide': 'top'}}>{key}</caption>
           </Table>
         </ListItem>
       ))}
@@ -123,7 +124,7 @@ export const Fixtures = () => {
   return (
     <Grid container spacing={3}>
       {Object.entries(fixtureData).map(([key, items]) => (
-        <Grid key={key} item xs={12}>
+        <Grid key={key} item xs={12} style={{maxWidth: 'initial'}}>
           {key}
           <FixtureList matches={items} />
         </Grid>

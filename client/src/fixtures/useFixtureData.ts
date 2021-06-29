@@ -34,7 +34,6 @@ export type Fixture = {
     result?: Result;
 }
 
-
 export type FixturesType = Record<string, Fixture[]>;
 
 const getTeamPlayerFromMatch= ({id}: any) : TeamPlayer => {
@@ -76,7 +75,7 @@ const mapFixtureFromMatch = (match: any): {matchData: Fixture, stage: string} =>
    const {stage} = match;
 
    const matchData = {
-    matchDateAndTime: match.utcDate,
+    matchDateAndTime: new Date(Date.parse(match.utcDate)),
     homeTeam: getTeamPlayerFromMatch(match.homeTeam),
     awayTeam: getTeamPlayerFromMatch(match.awayTeam),
     status: getStatusFromMatch(match),

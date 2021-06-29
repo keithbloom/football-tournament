@@ -1,16 +1,21 @@
 import { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core/styles";
 
-import {
-  useFixtureData,
-  Fixture,
-  TeamPlayer,
-} from "./useFixtureData";
+import { useFixtureData, Fixture, TeamPlayer } from "./useFixtureData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     ...theme.typography.body2,
+  },
+  smallCol: {
+    padding: "6px 6px 6px 12px",
   },
   teamBlock: {
     ...theme.typography.body1,
@@ -31,18 +36,23 @@ const useStyles = makeStyles((theme) => ({
   },
   teamItem: {
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+  },
+  teamItemAway: {
+    display: "flex",
+    justifyContent: "space-between",
   },
 }));
 
 const TeamItem = ({ teamName, playerName, crestUrl }: TeamPlayer) => {
   const classes = useStyles();
   return (
-    <div className={classes.teamBlock}>
+    <>
       <img alt={`${teamName} flag`} height="15px" src={crestUrl} />
       <span>{teamName}</span>
       <strong>({playerName})</strong>
-    </div>
+    </>
   );
 };
 
@@ -58,14 +68,46 @@ const ScoreItem = (props: Fixture) =>
 const FixtureItem = (props: Fixture) => {
   const classes = useStyles();
   return (
-    <>
-      <div>{props.matchDateAndTime}</div>
-      <div className={classes.teamItem}>
+    <TableRow>
+      <TableCell className={classes.smallCol}>{props.matchDateAndTime.toLocaleTimeString()}</TableCell>
+      <TableCell className={classes.teamItem}>
         <TeamItem {...props.homeTeam} />
+      </TableCell>
+      <TableCell className={classes.smallCol}>
         <ScoreItem {...props} />
+      </TableCell>
+      <TableCell className={classes.teamItemAway}>
         <TeamItem {...props.awayTeam} />
-      </div>
-    </>
+      </TableCell>
+    </TableRow>
+  );
+};
+
+const FixtureList = ({ matches }: { matches: Fixture[] }) => {
+  const itemsByDate = matches.reduce<Record<string, Fixture[]>>(
+    (acc: Record<string, Fixture[]>, curr: Fixture) => {
+      const date = curr.matchDateAndTime.toDateString();
+      acc[date] ? (acc[date] = [...acc[date], curr]) : (acc[date] = [curr]);
+      return acc;
+    },
+    {}
+  );
+
+  return (
+    <List>
+      {[...Object.entries(itemsByDate)].map(([key, items]) => (
+        <ListItem key={key}>
+          <Table>
+            <TableBody>
+              {items.map((item, index) => (
+                <FixtureItem key={index} {...item} />
+              ))}
+            </TableBody>
+            <caption>{key}</caption>
+          </Table>
+        </ListItem>
+      ))}
+    </List>
   );
 };
 
@@ -84,9 +126,7 @@ export const Fixtures = () => {
       {Object.entries(fixtureData).map(([key, items]) => (
         <Grid key={key} item xs={12}>
           {key}
-          {items.map((x, i) => (
-            <FixtureItem key={i} {...x} />
-          ))}
+          <FixtureList matches={items} />
         </Grid>
       ))}
     </Grid>

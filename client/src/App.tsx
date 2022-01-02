@@ -2,6 +2,7 @@ import "./App.css";
 import { Link, Switch, Route } from "react-router-dom";
 import { CreateTournament } from "./tournament";
 import { Dashboard } from "./Dashboard";
+import { Tables } from "./table";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Dashboard />
+        </Route>
+        <Route path="/tables">
+          <Tables />
         </Route>
         <Route path="/tournament">
           <CreateTournament />

@@ -42,23 +42,22 @@ const convertToTables = (data: any) => {
 export const useTableData = () => {
   const [tableData, setTableData] = useState<Table>({});
   const [isLoaded, setIsLoaded] = useState(false);
-  const [errorMessage, setErrorMessage] =
-    useState<string | undefined>(undefined);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     fetch(standingsEndpoint)
       .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          setIsLoaded(true);
-          setTableData(convertToTables(result));
-        },
-        (error) => {
-          setIsLoaded(true);
-          setErrorMessage(error);
-        }
-      );
+      .then((result) => {
+        console.log(result);
+        setIsLoaded(true);
+        setTableData(convertToTables(result));
+      })
+      .catch((error) => {
+        setIsLoaded(true);
+        setErrorMessage(`${error}`);
+      });
   }, []);
 
   return { tableData, isLoaded, errorMessage };
